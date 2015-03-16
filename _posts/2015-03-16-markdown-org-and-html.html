@@ -1,0 +1,83 @@
+---
+layout: post
+title: -Markdown- Org and HTML
+tags:  Org-mode  Html
+---
+
+<p>
+Jeykll supports the use of <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> with inline HTML tags which makes it easier to quickly write posts with Jekyll, without having to worry too much about text formatting. A sample of the formatting follows.
+</p>
+
+<p>
+Tables have also been extended from Markdown:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">First Header</th>
+<th scope="col" class="left">Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Content Cell</td>
+<td class="left">Content Cell</td>
+</tr>
+
+<tr>
+<td class="left">Content Cell</td>
+<td class="left">Content Cell</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Here&rsquo;s an example of an image, which is included using Markdown:
+</p>
+
+<img src="/img/sample_feature_img_2.png" alt="Geometric pattern with fading gradient" />
+
+
+<p>
+Geometric pattern with fading gradient
+</p>
+
+<p>
+Highlighting for code in Jekyll is done using Pygments or Rouge. This theme makes use of Pygments by default.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">count to ten</span>
+<span style="color: #F0DFAF; font-weight: bold;">for</span> (<span style="color: #F0DFAF; font-weight: bold;">var</span> <span style="color: #DFAF8F;">i</span> = 1; i &lt;= 10; i++) {
+    console.log(i);
+}
+
+<span style="color: #5F7F5F;">// </span><span style="color: #7F9F7F;">count to twenty</span>
+<span style="color: #F0DFAF; font-weight: bold;">var</span> <span style="color: #DFAF8F;">j</span> = 0;
+<span style="color: #F0DFAF; font-weight: bold;">while</span> (j &lt; 20) {
+    j++;
+    console.log(j);
+}
+</pre>
+</div>
+
+<p>
+Type Theme uses KaTeX to display maths. Equations such as \($S_n = a \times \frac{1-r^n}{1-r}$\) can be displayed inline.
+</p>
+
+<p>
+Alternatively, they can be shown on a new line:
+</p>
+
+<p>
+\($ f(x) = \int \frac{2x^2+4x+6}{x-2} $\)
+</p>

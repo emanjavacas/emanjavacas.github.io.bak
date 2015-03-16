@@ -12,7 +12,7 @@ theme:
   
   # Header and footer text
   footer_text: >
-   This blog uses <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a> and <a href="http://org-mode.org">Org-mode</a>
+   This blog uses <a href="http://jekyllrb.com">Jekyll</a> is based on <a href="https://rohanchandra.github.io/project/type/">Type Theme</a> and powered by <a href="http://orgmode.org">Org-mode</a>
   
   # Icons
   rss: false
