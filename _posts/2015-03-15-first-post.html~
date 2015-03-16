@@ -2,8 +2,8 @@
 layout: post
 title: A random blogpost
 excerpt: Will it ever become a nice looking blog?
-
 feature-img: "img/21469889_7e1a6d9748_o.jpg"
+categories: test jekyll org-publish
 ---
 
 <div id="outline-container-sec-1" class="outline-2">
@@ -41,6 +41,6 @@ And add them to the blogpost as:
 </pre>
 </div>
 
-<img src=./img/2015-3-15-funny-dog.jpg" />
+<img src=/img/2015-3-15-funny-dog.jpg" />
 </div>
 </div>
