@@ -11,18 +11,30 @@ theme:
   description: "A website with blog posts and pages" # used by search engines
   
   # Header and footer text
-  # header_text: >
   footer_text: >
-   This blog uses <a href="http://jekyllrb.com">Jekyll</a>, <a href="https://rohanchandra.github.io/project/type/">Type Theme</a> and <a href="http://orgmode.org">Org Mode</a>
+   This blog uses <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a> and <a href="http://org-mode.org">Org-mode</a>
   
   # Icons
   rss: false
-  email_address: enrique.manjavacas@gmail.com
+  email_address: enrique.manjavacas@gmail.com# Full email address, e.g. "sam@example.com"
+  behance:
   bitbucket: 
+  dribbble: 
   facebook: 
-  github: "emanjava"
+  flickr: 
+  github: "emanjavacas"
   google_plus: 
+  instagram: 
+  linkedin:  # Full URL
+  pinterest: 
+  reddit: 
+  soundcloud: 
+  stack_exchange:  # Full URL
+  steam: 
+  tumblr: 
   twitter: "emanjava"
+  wordpress: 
+  youtube: 
   
   # Scripts
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
@@ -31,8 +43,8 @@ theme:
   
   # Localization strings
   str_follow_on: "Follow on"
-  str_email: "Email"
   str_rss_follow: "Follow RSS feed"
+  str_email: "Email"
   str_next: "Next"
   str_prev: "Prev"
   str_continue_reading: "Continue reading"
@@ -50,3 +62,5 @@ highlighter: pygments
 sass:
   sass_dir: _sass
   style: :compressed
+
+
