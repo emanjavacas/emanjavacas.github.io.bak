@@ -42,14 +42,18 @@ And add them to the blogpost as:
 <div class="org-src-container">
 
 <pre class="src src-org"><span style="color: #7F9F7F;">#+BEGIN_HTML</span>
-<span style="color: #b3b3b3;">&lt;img src="/img/2015-03-15-funny-dog.jpg" align="middle" alt="A funny dog is hungry"</span>
-<span style="color: #b3b3b3;">&lt;figcaption&gt;Caption goes here&lt;/figcaption&gt;/&gt;</span>
+<span style="color: #b3b3b3;">&lt;figure&gt;</span>
+<span style="color: #b3b3b3;">    &lt;img src="/img/2015-03-15-funny-dog.jpg" align="middle" alt="A funny dog is hungry"/&gt;</span>
+<span style="color: #b3b3b3;">    &lt;figcaption&gt;Caption goes here&lt;/figcaption&gt;</span>
+<span style="color: #b3b3b3;">&lt;/figure&gt;</span>
 <span style="color: #7F9F7F;">#+END_HTML</span>
 </pre>
 </div>
 
-<img src="/img/2015-03-15-funny-dog.jpg" align="middle" alt="A funny dog is hungry"
-<figcaption>Caption goes here</figcaption>/>
+<figure>
+    <img src="/img/2015-03-15-funny-dog.jpg" align="middle" alt="A funny dog is hungry"/>
+    <figcaption>Caption goes here</figcaption>
+</figure>
 </div>
 </div>
 
