@@ -1,0 +1,52 @@
+# SITE CONFIGURATION
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://emanjavacas.github.io" # the base hostname & protocol for your site
+
+# THEME-SPECIFIC CONFIGURATION
+theme:
+  # Meta
+  title: Yet another blog
+  avatar: https://avatars.githubusercontent.com/u/6195107?v=3
+  gravatar: # Email MD5 hash
+  description: "A website with blog posts and pages" # used by search engines
+  
+  # Header and footer text
+  # header_text: >
+  footer_text: >
+   This blog uses <a href="http://jekyllrb.com">Jekyll</a>, <a href="https://rohanchandra.github.io/project/type/">Type Theme</a> and <a href="http://orgmode.org">Org Mode</a>
+  
+  # Icons
+  rss: false
+  email_address: enrique.manjavacas@gmail.com
+  bitbucket: 
+  facebook: 
+  github: "emanjava"
+  google_plus: 
+  twitter: "emanjava"
+  
+  # Scripts
+  google_analytics: # Tracking ID, e.g. "UA-000000-01"
+  disqus_shortname:
+  katex: true # Enable if using math markup 
+  
+  # Localization strings
+  str_follow_on: "Follow on"
+  str_email: "Email"
+  str_rss_follow: "Follow RSS feed"
+  str_next: "Next"
+  str_prev: "Prev"
+  str_continue_reading: "Continue reading"
+  
+  # Colours, typography and padding
+  # Open the "_sass > base" folder, and open "_variables.scss"
+
+# PAGINATION
+paginate: 5
+paginate_path: "blog/page:num"
+
+# BUILD SETTINGS
+markdown: kramdown
+highlighter: pygments
+sass:
+  sass_dir: _sass
+  style: :compressed
