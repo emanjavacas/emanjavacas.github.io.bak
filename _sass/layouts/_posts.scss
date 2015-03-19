@@ -31,13 +31,15 @@ article {
 header {
   h1 {
     margin: 0;
+    font-size: xx-large;
   }
   .meta {
-    color: rgba($text-color, .5);
-    font-size: 1.3em;
     letter-spacing: 0.1em;
-    margin: 0;
-    text-transform: uppercase;
+    margin: 10;
+    margin-top: 10;
+    color: #808080;
+    font-size: 18px;
+    font-style: italic;
   }
 }
 .feature-image {

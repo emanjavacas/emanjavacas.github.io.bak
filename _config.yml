@@ -37,8 +37,8 @@ theme:
   youtube: 
   
   # Scripts
-  google_analytics: # Tracking ID, e.g. "UA-000000-01"
-  disqus_shortname:
+  google_analytics: UA-60838718-1
+  disqus_shortname: miscelanea-pura
   katex: true # Enable if using math markup 
   
   # Localization strings
