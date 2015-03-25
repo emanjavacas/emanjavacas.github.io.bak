@@ -15,8 +15,10 @@ article {
     font-size: 0.9em;  
     .org-src-container {
 	font-size: .8em;
-	margin-left: -30px;
-	margin-right: -30px;
+	/* margin-left: -30px; */
+	/* margin-right: -30px; */
+	margin-left: 5px;
+	margin-right: -70px;
     }
      h2 {
 	font-size: 1.3em;    
@@ -25,7 +27,10 @@ article {
     @extend %link-hover;
   }
   .footnotes {
-    font-size: 0.8em;
+    font-size: 0.9em;
+  }
+    .footdef {
+	font-size: .9em;
   }
 }
 header {

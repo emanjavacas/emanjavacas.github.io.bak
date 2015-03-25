@@ -1,0 +1,128 @@
+---
+layout: post
+comments: true
+title: The day I connected to a remote nREPL
+tags: geekery emacs clojure
+---
+
+<p>
+On one of my usual adventures to our beloved server I happened to need to make use of a Clojure Lein nREPL to play and interact with.
+Of course, for productivity, this has to go through Emacs. I thought that it would be as easy as it normally is and that I
+could do the standard
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-text">M-x cider-jack-in
+</pre>
+</div>
+
+<p>
+on a remote file and be happy. But it didn&rsquo;t work for reasons probably related to the way I installed <code>lein</code> on the server<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
+</p>
+
+<p>
+Anyway, I got inspired by this <a href="http://asymmetrical-view.com/2009/08/20/emacs-slime-remote-repl.html">old post</a> from 2009 and tried an alternative way using a SSH-tunnel.
+</p>
+
+<p>
+That&rsquo;s how it goes:
+</p>
+
+
+<p>
+<b>First</b> Have a nREPL process running inside a <a href="https://kb.iu.edu/d/acuy">screen</a> on the remote server.
+</p>
+
+<p>
+Of course, it doesn&rsquo;t have to run
+through <code>screen</code>, but it sure has advantages, the most prominent being that the process won&rsquo;t die in case of a connection failure.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-text">$ screen -S repl
+$ lein repl
+</pre>
+</div>
+
+<p>
+This will output the usual welcome message:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-text">nREPL server started on port 55222 on host 127.0.0.1 - nrepl://127.0.0.1:55222
+REPL-y 0.3.5, nREPL 0.2.6
+Clojure 1.6.0
+Java HotSpot(TM) 64-Bit Server VM 1.8.0_11-b12
+    Docs: (doc function-name-here)
+          (find-doc "part-of-name-here")
+  Source: (source function-name-here)
+ Javadoc: (javadoc java-object-or-class-here)
+    Exit: Control+D or (exit) or (quit)
+ Results: Stored in vars *1, *2, *3, an exception in *e
+
+user=&gt;
+</pre>
+</div>
+
+<p>
+Now take note of the port (in this case 55222), because we will use it as the destination port of the ssh tunnel.
+</p>
+
+<p>
+<b>Second</b> Create a SSH tunnel (info <a href="http://www.revsys.com/writings/quicktips/ssh-tunnel.html">here</a>) between a local port of your choice (1008 for instance) and the local port in the server where the nREPL is running (55222 in this case).
+</p>
+
+
+<p>
+This means:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-text">ssh -L 1009:localhost:55222 username@remotehost
+</pre>
+</div>
+
+<p>
+<b>Finally</b> you need to navigate to a clojure project in the remote host via <code>tramp</code> and then connect to the tunneled port.
+Now, I was used to invoke my repls in <code>emacs</code> through <code>M-x cider-jack-in</code>. This time you will be using <code>M-x cider-connect</code> instead
+and explicitly connect to the entry port that you specified when setting up the tunnel.
+</p>
+
+<p>
+For this example, I wrote
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-text">M-x cider-connect RET localhost RET 1009
+</pre>
+</div>
+
+<p>
+and voilá! a cider-repl buffer automatically showed up. Note that we don&rsquo;t have to wait for the JVM to start since it is already running at the other side of the tunnel.
+</p>
+
+<p>
+And so I was able to happily enjoy interactive developing on a remote server. Hooray!
+</p>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+I was getting an error of the form
+</p>
+<div class="org-src-container">
+
+<pre class="src src-text">error in process sentinel: Could not start nREPL server: /bin/sh: 1: lein: not found
+</pre>
+</div>
+<p class="footpara">
+that I couldn&rsquo;t really tackle since I don&rsquo;t have admin rights.
+</p></div>
+
+
+</div>
+</div>
