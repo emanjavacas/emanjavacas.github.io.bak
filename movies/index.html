@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Embed Test</title>
@@ -12,25 +12,38 @@
 </head>
 <body>
     <div class="header">
-        <div class="container">
+        <div class="wrapper">
+	  <div class="slot">
             <h1>Movie Magic </h1>
             <h2>Oh Yeah</h2>
-            <p>...</p>
+	  </div>
+	  <div class="slot">
+	    <img src="http://cliparts.co/cliparts/Aib/K9r/AibK9rA8T.png" margin-top="0px" height="100px" width="500px">
+	  </div>
+            <!-- <p>...</p> -->
         </div>
     </div>
-
+    
     <div class="controls">
-        <div class="container">
-            <label for="sizeSlider">Size</label>
-            <input id="sizeSlider" type="range" min="1" max="10" oninput="changeSize(this)">
-            <label for="positionSlider">Slide</label>
-            <input id="sizeSlider" type="range" min="-50" max="50" oninput="changePosition(this)">      
-            <label for="hueSlider">Year</label>
-            <input id="hueSlider" type="range" min="1900" max="2015" oninput="changeHue(this)">
-            <br>
-            <button onclick="player.start()">Start</button>
-            <button onclick="player.stop()">Stop</button>
-        </div>
+      <div class="wrapper">
+	<div class="slot">
+          <label for="sizeSlider">Size</label>
+          <input id="sizeSlider" type="range" min="1" max="10" oninput="changeSize(this)">
+	</div>
+	<div class="slot">
+          <label for="positionSlider">Slide</label>
+          <input id="sizeSlider" type="range" min="-50" max="50" oninput="changePosition(this)">      
+	</div>
+	<div class="slot">
+          <label for="hueSlider">Year</label>
+          <input id="hueSlider" type="range" min="1900" max="2015" oninput="changeHue(this)">
+	</div>
+	<div class="slot">	    
+          <!-- <br> -->
+          <button onclick="player.start()">Start</button>
+          <button onclick="player.stop()">Stop</button>
+	</div>
+      </div>
     </div>
 
     <div class="scene">
