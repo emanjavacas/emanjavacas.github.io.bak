@@ -21,7 +21,6 @@ function changeHue(e) {
     player.setValue('add1', 'b', parseFloat(e.value));
 }
 
-
 var tx = 0;
 var ty = 0;
 var px = 0;
@@ -30,8 +29,8 @@ var py = 0;
 function onMouseMove(e) {
     var dx = e.clientX - px;
     var dy = e.clientY - py;
-    tx += dx;
-    ty += dy;
+    tx += 1 * dx;
+    ty += 1 * dy;
     player.setValue('makePoint2', 'x', tx);
     player.setValue('makePoint2', 'y', ty);
     px = e.clientX;
