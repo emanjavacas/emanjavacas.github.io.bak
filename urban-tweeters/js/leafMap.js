@@ -11,22 +11,38 @@ var leafMap = function(){
     });
     var addStatsLayer = function(geojsonURL){
 	$.getJSON(geojsonURL, function(data){
-	    L.geoJson(data, {
+	    geojson = L.geoJson(data, {
 		style: {
-		    fillColor : 'gray',
+		    fillColor : '#e3f4cb',
 		    weight : 2,
-		    opacity : 0.4,
+		    opacity : 0.7,
 		    color : 'white',
 		    dashArray : 3,
 		    fillOpacity : 0.4
 		},
 		onEachFeature: function (feature, layer){
 		    layer.bindPopup(feature.properties.name);
+		    layer.on({
+			mouseover : function (e){
+			    e.target.setStyle({
+				weight : 5,
+				color : '#666',
+				dashArray : '',
+				fillOpacity : 0.7
+			    });
+			    e.target.bringToFront();
+			    if ($('#stats').hasClass('active')){
+				$('#stats').text(feature.properties.name);
+			    }
+			},
+			mouseout : function resetHighlight(e){
+			    geojson.resetStyle(e.target);
+			}
+		    });
 		}
 	    }).addTo(map); 
 	});
     };
-
     return {
 	map: map,
 	init: function(){
