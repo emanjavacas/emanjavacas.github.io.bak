@@ -13,14 +13,6 @@ L.tileLayer('http://a.tile.stamen.com/toner/{z}/{x}/{y}.png', {
     minZoom: 0
 }).addTo(map);
 
-// Add shapes
-// var circle = L.circle(antwerp, 120, {
-//     color: 'green',
-//     fillColor: '#f23',
-//     fillOpacity: 0.5    
-// }).addTo(map);
-// circle.bindPopup("<b>Hi, there!<br>");
-
 // show coordinates when clicking
 var pop = L.popup();
 function onMapClick(e) {   
@@ -48,18 +40,17 @@ function highlightFeature(e){
     info.update(layer.feature.properties);
 }
 
+var geojson;
 function resetHighlight(e){
     geojson.resetStyle(e.target);
     info.update();
 }
 
-var geojson;
-
 function zoomToFeature(e){
     map.fitBounds(e.target.getBounds());
 }
 
-var antwerpenUrl = "http://data.esribeluxdata.opendata.arcgis.com/datasets/462065612d3a487ca75bc304add0e540_0.geojson";
+var antwerpenUrl = "https://raw.githubusercontent.com/emanjavacas/urban-tweeters/master/resources/hoods/antwerp.geojson";
 
 $.getJSON(antwerpenUrl, function(data){
     var states = data["features"];
