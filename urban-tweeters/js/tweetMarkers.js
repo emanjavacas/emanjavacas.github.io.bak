@@ -23,23 +23,23 @@ function getTweetHtml(user, tweet){// return a promise
     return new Promise(function(resolve, reject){
 	if (cachedTweets[user+tweet]) resolve(cachedTweets[user+tweet]);	
 	else {
-	    var req = new XMLHttpRequest();
-	    req.open('GET', buildOEmbed(user, tweet,
-					{omit_script: "true",
-					 hide_thread: "true",
-					 hide_media: "true"}));
-	    req.onload = function(){
-		if (req.status == 200 ) {
-		    var html = $.parseJSON(req.response)['html'];
-		    cachedTweets[user+tweet] = html;
-		    resolve(html);
-		} else reject(Error(req.status));
-	    };
-	    req.onerror = function(){reject(Error("Network Error"));};
-	    req.send();	
+	    $.ajax(
+		{url: buildOEmbed(user, tweet,
+				  {omit_script: "true",
+				   hide_thread: "true",
+				   hide_media: "true"}),
+		 dataType: "jsonp"
+		})
+		.then(function(data){
+		    cachedTweets[user+tweet] = data.html;
+		    resolve(data.html);
+		}).fail(function(){
+		    reject(Error("Error downloading url"));
+		});
 	}
     });
-};
+}
+
 
 function getPoints(URL, onEach){// onEach takes {id, user, coordinates}
     $.getJSON(URL, function(e){
