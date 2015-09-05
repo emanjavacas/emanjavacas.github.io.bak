@@ -1,63 +1,66 @@
 var leafMap = function(){
+    // map
     var center = [52.5167, 13.3833];
     var map = L.map('map');
     var tileUrl = 'http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png';
     var tileAttr = 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-
     var mapLayer = L.tileLayer(tileUrl, {
 	attribution: tileAttr,
 	maxZoom: 18,
 	minZoom: 0
     });
-    var addStatsLayer = function(geojsonURL){
-	$.getJSON(geojsonURL, function(data){
-	    geojson = L.geoJson(data, {
-		style: {
-		    fillColor : '#e3f4cb',
-		    weight : 2,
-		    opacity : 0.7,
-		    color : 'white',
-		    dashArray : 3,
+    var defaultStyle = {
+	fillColor : '#e3f4cb',
+	weight : 3,
+	opacity : 0.7,
+	color : '#666',
+	dashArray : 3,
+	fillOpacity : 0
+    };
+    var onEachFeature = function(feature, layer){
+	layer.bindPopup(feature.properties.name);
+	layer.on({
+	    mouseover : function (e){
+		e.target.setStyle({
+		    weight : 5,
+		    color : '#666',
+		    dashArray : '',
 		    fillOpacity : 0.4
-		},
-		onEachFeature: function (feature, layer){
-		    layer.bindPopup(feature.properties.name);
-		    layer.on({
-			mouseover : function (e){
-			    e.target.setStyle({
-				weight : 5,
-				color : '#666',
-				dashArray : '',
-				fillOpacity : 0.7
-			    });
-			    e.target.bringToFront();
-			    if ($('#stats').hasClass('active')){
-				$('#stats').text(feature.properties.name);
-			    }
-			},
-			mouseout : function resetHighlight(e){
-			    geojson.resetStyle(e.target);
-			}
-		    });
+		});
+		e.target.bringToFront();
+		if ($('#stats').hasClass('active')){
+		    $('#stats').text(feature.properties.name);
 		}
-	    }).addTo(map); 
+	    },
+	    mouseout : function (e){
+		e.target.setStyle(defaultStyle);
+	    }
 	});
+    };    
+    var addBaseGeo = function(geojsonURL, layerName, control){
+	$.getJSON(geojsonURL).done(
+	    function(data){
+		var geojson = L.geoJson(data, {
+		    style: defaultStyle,
+		    onEachFeature: onEachFeature
+		});
+		control.addBaseLayer(geojson, layerName);
+	    }
+	).fail(
+	    function(jqxhr, textStatus, error){
+		var err = textStatus + ", " + error;
+		console.log(layerName + " Failed: " + err );
+	    }
+	);
     };
     return {
 	map: map,
+	addBaseGeo: addBaseGeo,	    
 	init: function(){
 	    map.setView(center, 13);
 	    map.addLayer(mapLayer);
-	},
-	addMarker: function(latlng){
-	    L.marker(latlng).addTo(map);
-	},
-	addStatsLayer: addStatsLayer
+	}
     };
-    
 }();
 
-// var tileUrl = 'http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png';
-// var tileAttr = '&copy;2012 Esri & Stamen, Data from OSM and Natural Earth';
-// 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}'
-// 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+		

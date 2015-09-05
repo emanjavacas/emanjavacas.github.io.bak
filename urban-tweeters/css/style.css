@@ -1,5 +1,5 @@
 body {
-    font-family: 'Fjord One', sans-serif;
+    font-family: sans-serif;
 }
 
 body:after {
@@ -19,6 +19,7 @@ body:after {
 }
 
 #header {
+    font-family: 'Fjord One';
     background-color: rgba(0,0,0,0.1);
     height: 45px;
     font-weight: bold;

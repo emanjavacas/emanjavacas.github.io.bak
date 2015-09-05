@@ -28,9 +28,10 @@ var kiez = function(){
 	});
     };
     return {
-	getPoints: function(onEach){// onEach takes {id, user, coordinates}
-	    $.getJSON('data/kiez.min.json', function(e){
+	getPoints: function(URL, onEach){// onEach takes {id, user, coordinates}
+	    $.getJSON(URL, function(e){
 		$.each(e, function(k, v){
+		    v.coordinates = [v.coordinates[1], v.coordinates[0]];
 		    onEach(v);
 		});
 	    });
@@ -38,13 +39,3 @@ var kiez = function(){
 	getTweetHtml: getTweetHtml
     };
 }();
-
-
-// kiez.getPoints(
-//     function(obj){
-// 	kiez.getTweetHtml(obj['user'], obj['id'])
-// 	    .then(
-// 		function(e){
-// 		    $(e['html']).appendTo('.main');
-// 		});
-//     });
