@@ -4,9 +4,9 @@ var tweetIcon = L.icon({
     shadowSize: [0, 0]
 });
 
-$(document).ajaxStart(function(){
-    $('.tab-pane.active').html("Loading");
-});
+// $(document).ajaxStart(function(){
+//     $('.tab-pane.active').html("Loading");
+// });
 
 $(document).ready(function(){
     $('.dropdown-menu>li>a').on('click', function(e){
