@@ -28,18 +28,19 @@ function getTweetHtml(user, tweet){// return a promise
 				  {omit_script: "true",
 				   hide_thread: "true",
 				   hide_media: "true"}),
-		 dataType: "jsonp"
-		})
-		.then(function(data){
-		    cachedTweets[user+tweet] = data.html;
-		    resolve(data.html);
-		}).fail(function(){
-		    reject(Error("Error downloading url"));
-		});
+		 dataType: "jsonp",
+		 crossDomain: false,
+		 success: function(data){
+		     alert(Object.keys(data));
+		     cachedTweets[user+tweet] = data.html;
+		     resolve(data.html);},
+		 error: function(xhr, status, errorThrown){
+		     alert("Failed! " + status);
+		     reject();
+		 }});
 	}
     });
 }
-
 
 function getPoints(URL, onEach){// onEach takes {id, user, coordinates}
     $.getJSON(URL, function(e){
