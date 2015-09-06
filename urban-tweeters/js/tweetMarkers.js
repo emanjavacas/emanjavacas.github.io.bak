@@ -22,23 +22,20 @@ function getTweetHtml(user, tweet){// return a promise
     var cachedTweets = {};
     return new Promise(function(resolve, reject){
 	if (cachedTweets[user+tweet]) resolve(cachedTweets[user+tweet]);	
-	else {
-	    $.ajax(
-		{url: buildOEmbed(user, tweet,
-				  {omit_script: "true",
-				   hide_thread: "true",
-				   hide_media: "true"}),
-		 dataType: "jsonp",
-		 crossDomain: false,
-		 success: function(data){
-		     alert(Object.keys(data));
-		     cachedTweets[user+tweet] = data.html;
-		     resolve(data.html);},
-		 error: function(xhr, status, errorThrown){
-		     alert("Failed! " + status);
-		     reject();
-		 }});
-	}
+	else {$.ajax({
+	    dataType: "jsonp",
+	    timeout: 1000,
+	    url: buildOEmbed(user, tweet,
+			     {omit_script: "true",
+			      hide_thread: "true",
+			      hide_media: "true"}),
+	    success: function(data, textStatus, xOptions){
+		cachedTweets[user+tweet] = data.html;
+		resolve(data.html);},
+	    error: function(xOptions, textStatus){
+		reject();
+	    }
+	});}
     });
 }
 
@@ -72,7 +69,7 @@ function getPoints(URL, onEach){// onEach takes {id, user, coordinates}
 		promise.then(
 		    function(html){
 			that.html(html);
-			twttr.widgets.load(that);
+			// twttr.widgets.load(that);
 		    },
 		    function(){
 			that.html(settings.onErrorMessage);
