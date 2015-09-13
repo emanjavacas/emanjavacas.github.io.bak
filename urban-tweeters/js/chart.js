@@ -75,20 +75,34 @@ var chartD3 = function(){
 	      })
  	      .style('fill-opacity', 1)
 	      .each(function(d, i){
+		  var textNode = d3.selectAll('.bar text').filter(function(dd){
+		      return dd.key == d.key;
+		  });
 		  d3.select(this)
 		      .select('rect')
 		      .attr('width', function(d, i){return x(d.value);})
 		      .attr('height', barHeight - 5)
-		      .on('click', function(){
-			  var node = d3.selectAll('.bar text').filter(function(dd){
-			      return dd.key == d.key;
-			  });
-			  if (node.classed('selected')) {
-			      node.transition().ease('circle').text(d.key);   
-			  }
-			  else node.transition().ease('circle').text(d.value);
-			  node.classed('selected', !node.classed('selected'));
+		      .on('mouseover', function(){
+			  textNode.text(d.value);
+			  d3.select(this)
+			      .style('fill', 'orange');			       
+		      })
+		      .on('mouseout', function(){
+			  d3.select(this)
+			      .transition().duration(250)
+			      .style('fill', '#337ab7');			       
+			  textNode.text(d.key);
 		      });
+		      // .on('click', function(){
+		      // 	  var node = d3.selectAll('.bar text').filter(function(dd){
+		      // 	      return dd.key == d.key;
+		      // 	  });
+		      // 	  if (node.classed('selected')) {
+		      // 	      node.transition().ease('circle').text(d.key);   
+		      // 	  }
+		      // 	  else node.transition().ease('circle').text(d.value);
+		      // 	  node.classed('selected', !node.classed('selected'));
+		      // });
 		  d3.select(this)
 		      .select('text')
 		      .attr('y', barHeight / 2)

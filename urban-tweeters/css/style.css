@@ -38,6 +38,10 @@ div#map {
     height: 600px;
 }
 
+.nounderline {
+    text-decoration: none !important;
+}
+
 /* chart */
 #stats {
     height: 500px;
