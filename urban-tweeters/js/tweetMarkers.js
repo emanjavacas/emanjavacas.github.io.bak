@@ -14,7 +14,8 @@ function buildOpts(opts){
 };
 
 function buildOEmbed(user, tweet, opts){
-    var path = "https://api.twitter.com/1/statuses/oembed.json?url=https://twitter.com/";
+    var path = "https://api.twitter.com/1/statuses/" +
+	       "oembed.json?url=https://twitter.com/";
     return path + user + "/status/" + tweet + buildOpts(opts || {});
 };
 

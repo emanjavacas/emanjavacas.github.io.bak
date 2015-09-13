@@ -4,10 +4,6 @@ var tweetIcon = L.icon({
     shadowSize: [0, 0]
 });
 
-// $(document).ajaxStart(function(){
-//     $('.tab-pane.active').html("Loading");
-// });
-
 $(document).ready(function(){
     $('.dropdown-menu>li>a').on('click', function(e){
 	$('#dropdown-ber').html($(this).text()+' <span class="caret"></span>');
@@ -23,7 +19,7 @@ $(document).ready(function(){
     	return function(markers){
 	    $('a[data-toggle="tab"]').on('hide.bs.tab', function(e){
     		if($(e.target).attr('href') == id)leafMap.map.removeLayer(markers);
-    		if($(e.relatedTarget).attr('href') == id)leafMap.map.addLayer(markers);		
+    		if($(e.relatedTarget).attr('href') == id)leafMap.map.addLayer(markers);
 	    });
     	};
     };
@@ -35,9 +31,9 @@ $(document).ready(function(){
     };
     leafMap.init();
     var geoLayer = L.control.layers();
-    leafMap.addBaseGeo('data/LOR-Prognoseraeume.min.json', "Prognoseräume", geoLayer);
-    leafMap.addBaseGeo('data/LOR-Bezirksregionen.min.json',"Bezirksregionen", geoLayer);
-    leafMap.addBaseGeo('data/LOR-Planungsraeume.min.json', "Planungsräume", geoLayer);    
+    leafMap.addBaseGeo('data/LOR-Prognoseraeume.min.lang.json', "Prognoseräume", geoLayer);
+    leafMap.addBaseGeo('data/LOR-Bezirksregionen.min.lang.json',"Bezirksregionen", geoLayer);
+    leafMap.addBaseGeo('data/LOR-Planungsraeume.min.lang.json', "Planungsräume", geoLayer); 
     geoLayer.addTo(leafMap.map);
     addMarkers('data/kiez.min.json', '#kiez');
     addMarkers('data/ick.min.json', '#ick');

@@ -28,8 +28,9 @@ var leafMap = function(){
 		    fillOpacity : 0.4
 		});
 		e.target.bringToFront();
-		if ($('#stats').hasClass('active')){
-		    $('#stats').text(feature.properties.name);
+		if ($('#stats').hasClass('active') && $('.chart')){
+		    $('#lor').text(feature.properties.name);
+		    chartD3.draw(feature.properties.langs);
 		}
 	    },
 	    mouseout : function (e){
@@ -38,21 +39,20 @@ var leafMap = function(){
 	});
     };    
     var addBaseGeo = function(geojsonURL, layerName, control){
-	$.getJSON(geojsonURL).done(
+	$.getJSON(geojsonURL).then(
 	    function(data){
 		var geojson = L.geoJson(data, {
 		    style: defaultStyle,
 		    onEachFeature: onEachFeature
 		});
 		control.addBaseLayer(geojson, layerName);
-	    }
-	).fail(
+	    },
 	    function(jqxhr, textStatus, error){
 		var err = textStatus + ", " + error;
 		console.log(layerName + " Failed: " + err );
-	    }
-	);
+	    }).done();
     };
+    map.on('baselayerchange', function(){chartD3.redraw('.chart');});
     return {
 	map: map,
 	addBaseGeo: addBaseGeo,	    

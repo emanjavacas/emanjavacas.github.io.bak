@@ -3,11 +3,10 @@
   <head>
     <!-- developement -->
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="js/vendor/jquery.jsonp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="js/vendor/twitter-widget.js"></script>
     <script src="js/vendor/leaflet.js"></script>
-    <script src="js/tweetMarkers.js"></script>
     <script src="js/main.js" charset="utf-8"></script>
     <link href="https://fonts.googleapis.com/css?family=Fjord+One" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -38,8 +37,14 @@
 	      </ul>
 	    </div> <!-- end heading -->
 	    <div class="panel-body">
-	      <div class="tab-content">
-		<div class="tab-pane fade in active" id="stats"></div>
+	      <div class="tab-content">	
+		<div class="tab-pane fade in active" id="stats">		  
+		  <p class="stats-heading">
+		    <strong>District name: </strong><span id="lor"></span>
+		  </p>
+		  <hr>
+		  <svg class="chart"></svg>
+		</div>
 		<div class="tab-pane fade" id="kiez"></div>
 		<div class="tab-pane fade" id="dit"></div>
 		<div class="tab-pane fade" id="jut"></div>
@@ -49,23 +54,20 @@
 		<div class="tab-pane fade" id="turkish"></div>
 	      </div>
 	    </div> <!-- end body -->
-	  </div> <!-- end infopanel -->
+	  </div> <!-- end infopanel -->	 
+
 	</div> <!-- end col -->
-	<!-- <div class="panel-body"> -->
-	<!-- </div> -->
 	<div class="col-md-8">
 	  <div class="panel panel-default">
-	    <!-- <div class="panel-heading"> -->
-	    <!--   Map of berlin -->
-	    <!-- </div> -->
 	    <div class="panel-body" id="map">
 	    </div>
 	  </div>      
 	</div>
       </div>
     </main>
-    
     <!-- Leaflet map script -->
+    <script src="js/chart.js"></script>    
     <script src="js/leafMap.js"></script>    
+    <script src="js/tweetMarkers.js"></script>
   </body>
 </html>
