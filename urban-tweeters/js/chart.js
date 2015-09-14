@@ -83,9 +83,9 @@ var chartD3 = function(){
 		      .attr('width', function(d, i){return x(d.value);})
 		      .attr('height', barHeight - 5)
 		      .on('mouseover', function(){
-			  textNode.text(d.value);
 			  d3.select(this)
 			      .style('fill', 'orange');			       
+			  textNode.text(d.value);
 		      })
 		      .on('mouseout', function(){
 			  d3.select(this)
@@ -93,16 +93,6 @@ var chartD3 = function(){
 			      .style('fill', '#337ab7');			       
 			  textNode.text(d.key);
 		      });
-		      // .on('click', function(){
-		      // 	  var node = d3.selectAll('.bar text').filter(function(dd){
-		      // 	      return dd.key == d.key;
-		      // 	  });
-		      // 	  if (node.classed('selected')) {
-		      // 	      node.transition().ease('circle').text(d.key);   
-		      // 	  }
-		      // 	  else node.transition().ease('circle').text(d.value);
-		      // 	  node.classed('selected', !node.classed('selected'));
-		      // });
 		  d3.select(this)
 		      .select('text')
 		      .attr('y', barHeight / 2)

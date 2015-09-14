@@ -4,14 +4,19 @@ var leafMap = function(){
     var myScale = d3.scale.quantize()
 	.range(colorbrewer.Greens[6]);
     var scales = {0:myScale,1:myScale,2:myScale};
-    var center = [52.5167, 13.3833];
+    var southWest = L.latLng(52.25, 13.00),
+    northEast = L.latLng(52.70, 13.80),
+    bounds = L.latLngBounds(southWest, northEast),
+    center = L.latLng(52.5167, 13.3833);
     var map = L.map('map');
+    map.setMaxBounds(bounds);
     var tileUrl = 'http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png';
     var tileAttr = 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
     var mapLayer = L.tileLayer(tileUrl, {
 	attribution: tileAttr,
 	maxZoom: 18,
-	minZoom: 0
+	minZoom: 11,
+	bounds: bounds
     });
     var defaultStyle = {
 	fillColor : '#e3f4cb',
@@ -101,7 +106,7 @@ var leafMap = function(){
 			var myStyle = $.extend({}, defaultStyle);
 			myStyle.fillColor = getColor(feature, 1);
 			myStyle.opacity = 0;
-			myStyle.fillOpacity = 0.6;
+			myStyle.fillOpacity = 0.8;
 			return myStyle;
 		    }
 		});
