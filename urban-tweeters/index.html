@@ -16,7 +16,10 @@
   </head>
   <body>
     <div class="container-fluid" id="header">
-        <h2 class="pull-left">Berlin tweets</h1>
+      <h2 class="pull-left">Berlin tweets</h2>      
+      <a href="#"><p data-toggle="modal" data-target="#infoModal" 
+	 class="pull-right" style="line-height: 45px;">About</p>
+      </a>
     </div>
     <main class="row">
       <div class="container-fluid">
@@ -56,7 +59,6 @@
 	      </div>
 	    </div> <!-- end body -->
 	  </div> <!-- end infopanel -->	 
-
 	</div> <!-- end col -->
 	<div class="col-md-8">
 	  <div class="panel panel-default">
@@ -65,42 +67,68 @@
 	  </div>      
 	</div>
       </div>
-      <footer>	
-	<hr>
-	<div class="row" style="text-align: center; font-size: 11px;">
-	  <p>
-	    This visualisation runs on <a class="nounderline" href="http://leafletjs.com/">Leaflet</a> 
-	    and <a class="nounderline" href="http://d3js.org/">D3.js</a>. <br>
-	    Website powered by <a class="nounderline" href="http://getbootstrap.com/">Twitter Bootstrap</a>
-	  </p>
-	</div>
-	<div class="row" style="text-align: center; font-size: 11px;">
-	  <p>
-	  Background image: <a class="nounderline" href="https://creativecommons.org/licenses/by-sa/2.0/">
-	    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/CC-BY-SA-icon-80x15.png"></a>
-	  <a class="nounderline" href="https://www.flickr.com/photos/walkingsf/">Eric Fisher</a><br>
-	  Berlin JSON polygons: <a class="nounderline" href="http://creativecommons.org/licenses/by/3.0/">
-	    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/CC-BY-icon-80x15.png"></a>
-	    <a class="nounderline" href="http://daten.berlin.de/datensaetze/geometrien-der-lor-bezirksregionen-berlins-stand-072012">Berlin Open Data</a><br>	    
-	  For the rest: <a class="nounderline" href="http://creativecommons.org/licenses/by/3.0/">
-	    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/CC-BY-icon-80x15.png">
-	  </a>
-	  <a class="nounderline" href="https://github.com/emanjavacas">Enrique Manjavacas</a>
-	  </p>
-	</div>
-	<hr>
-	<div class="row">
-	  <div class="col-md-6 col-md-offset-3" style="text-align: center; font-size: 10px;">
-	    <p>
-	      <em>Disclaimer</em>: <br>Tweets are being accessed via Twitter public API in agreement
-	      with its Terms of Service. <br>This means that if some of your tweets
-	      are referenced in this application, your tweet is publicly accesible. 
-	      <br>If you have authored some tweet and do not want it to appear in this<br>
-	      website, please change your privacy settings of your Twitter account.
-	    </p>
+      <!-- modal -->
+      <div class="modal fade" id="infoModal" role="info" tabindex="-1">	
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	      <h4 class="modal-title" style="text-align: center;">Disclaimer</h4>
+	    </div>
+	    <div class="modal-body">
+	      <div class="row center">
+		<div class="col-xs-8 col-xs-offset-2" style="font-size: 12px;">
+		<p>
+		  This visualisation runs on <a class="nounderline" href="http://leafletjs.com/">Leaflet</a> 
+		  and <a class="nounderline" href="http://d3js.org/">D3.js</a>. <br>
+		  Website powered by <a class="nounderline" href="http://getbootstrap.com/">Twitter Bootstrap</a>
+		</p>
+		</div>
+	      </div>
+	      <div class="row center">
+		<div class="col-xs-8 col-xs-offset-2" style="font-size: 12px;">
+		  <table>
+		    <tr>
+		      <td>Berlin JSON polygons:
+		      <a class="nounderline" 
+			     href="http://daten.berlin.de/datensaetze/geometrien-der-lor-bezirksregionen-berlins-stand-072012">Berlin Open Data</a></td>
+		      <td id="tdcc"><a class="nounderline" href="http://creativecommons.org/licenses/by/3.0/">
+		      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/CC-BY-icon-80x15.png"></a>
+		      </td>
+		    </tr>
+		  <tr>   
+		    <td>Background image: 
+		    <a class="nounderline" href="https://www.flickr.com/photos/walkingsf/">Eric Fisher</a></td>
+		    <td id="tdcc"><a class="nounderline" href="https://creativecommons.org/licenses/by-sa/2.0/">
+			<img src="https://upload.wikimedia.org/wikipedia/commons/9/96/CC-BY-SA-icon-80x15.png"></a></td>
+		  </tr>
+		    <tr>
+		      <td>For the rest:
+		      <a class="nounderline" href="https://github.com/emanjavacas">Enrique Manjavacas</a></td>
+		      <td id="tdcc"><a class="nounderline" href="http://creativecommons.org/licenses/by/3.0/">
+			  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/CC-BY-icon-80x15.png">
+			</a>
+		      </td>
+		    </tr>
+		  </table>
+		</div>
+	      </div>
+	      <hr>
+	      <div class="row center">
+		<div class="col-xs-8 col-xs-offset-2" style="font-size: 12px;">
+		  <p>
+		    Tweets are being accessed via Twitter public API in agreement <br>
+		    with its Terms of Service. This means that if some of your tweets <br>
+		    are referenced in this application, your tweet is publicly accesible.<br>
+		    If you have authored some tweet and do not want it to appear in this<br>
+		    website, please change your privacy settings of your Twitter account.
+		  </p>
+		</div>
+	      </div>	
+	    </div>
 	  </div>
-	</div>	
-      </footer>
+	</div>
+      </div>
     </main>
     <!-- Leaflet map script -->
     <script src="js/chart.js"></script>    

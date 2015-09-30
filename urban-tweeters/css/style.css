@@ -42,6 +42,10 @@ div#map {
     text-decoration: none !important;
 }
 
+#tdcc {
+    padding: 0 0 0 25px;
+}
+
 /* chart */
 #stats {
     height: 500px;
