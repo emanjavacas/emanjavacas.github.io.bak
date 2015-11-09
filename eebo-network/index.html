@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title>EEBO-network</title>
+    <!-- developement -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Fjord+One" rel="stylesheet" type="text/css" />
+    <link href="css/main.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.1.1/randomColor.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="js/vendor/sigma/sigma.min.js"></script>
+    <script src="js/vendor/sigma/plugins/sigma.parsers.json.min.js"></script>
+    <script src="js/vendor/sigma/plugins/sigma.plugins.neighborhoods.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/jquery.flot.min.js"></script>
+    <script src="js/vendor/jquery.flot.categories.min.js"></script>        
+    <script src="js/utils.js"></script>    
+    <script src="js/graph.fruchtermann.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+	<div class="col-lg-9" id="container"></div>
+	<div class="col-lg-3 pull-right">
+	  <div class="panel-group">
+	    <div class="panel panel-default">
+	      <div class="panel-heading">		
+		<h3 class="panel-title">
+		  <a data-toggle="collapse" href="#collapse">Display author info</a>
+		</h3>
+	      </div>
+	      <div id="collapse" class="panel-collapse collapse">
+		<div id="author-info" class="panel-body">
+		  <table>
+		    <tbody>
+		      <td></td>
+		      <td>Click on a node to display associated info</td>
+		    </tbody>
+		  </table>
+		  <br>
+		  <div id="gen" style="text-align:center;width:200px;height:140px"></div>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </body>
+</html>
+
