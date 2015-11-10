@@ -168,10 +168,7 @@ $(document).ready(function(){
 		    {"text": ""}
 		);
 
-		generations.forEach(function(gen){
-		    var myId = "#gen" + gen.replace(",", "");
-		    $(myId).bootstrapToggle('on');
-		});		
+		$("#genAll").bootstrapToggle('on');
 		// s.graph.nodes().forEach(function(n) {
 		//     n.color = n.originalColor;
 		// });
