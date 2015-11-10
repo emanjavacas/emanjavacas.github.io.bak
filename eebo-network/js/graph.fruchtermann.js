@@ -41,16 +41,17 @@ $(document).ready(function(){
 	})
 	.then(function(){
 	    console.log("Done!");
-	    s = new sigma({	// create graph
+	    var s = new sigma({	// create graph
 		graph: g,
 		container: "container",
 		settings: {
 		    scalingMode: "outside",
 		    sideMargin: 0.4,
 		    edgeColor: "default",
-		    defaultEdgeColor: "#e5e5e5",
+		    defaultEdgeColor: grey,
 		    defaultEdgeType: "source",
-		    defaultLabelSize: 12
+		    defaultLabelSize: 12,
+		    doubleClickEnabled: false
 		}
 	    });
 	    var allX = [];
@@ -89,11 +90,43 @@ $(document).ready(function(){
 	    s.graph.edges().forEach(function(e) {
 		e.originalColor = e.color;
 	    });
-
+	    var gensMap = {};
+	    generations.forEach(function(gen){ // index nodes by generation
+		gensMap[gen] = [];
+		s.graph.nodes().forEach(function(n){ // index
+		    gensMap[gen].push(n);
+		});
+	    });		
+	    generations.forEach(function(gen){ // add listeners
+		var myId = "#gen" + gen.replace(",", "");
+		$(myId).change(function(){
+		    var that = $(this);
+		    if ($(this).prop('checked')){
+			gensMap[gen].forEach(function(n){
+			    if (n.gen == gen) n.color = n.originalColor;
+			});	
+		    } else {
+			gensMap[gen].forEach(function(n){
+			    if (n.gen == gen) n.color = grey;
+			});	
+		    }
+		    s.refresh();
+		});
+	    });
+	    // add master listener
+	    $('#genAll').change(function(){
+		var that = $(this);
+		generations.forEach(function(gen){
+		    var myId = "#gen" + gen.replace(",", "");
+		    if (that.prop('checked'))
+			$(myId).bootstrapToggle('on');
+		    else $(myId).bootstrapToggle('off');
+		});		
+	    });
+	    
 	    s.refresh();
 
 	    s.bind('clickNode', function(e) {
-		console.log(e.data.node.data);
 		renderAuthorInfo(e.data.node,
 				 {"label": "Name",
 				  "gender": "Gender",
@@ -116,33 +149,37 @@ $(document).ready(function(){
 		    if (toKeep["nodes"][n.id])
 			n.color = n.originalColor;
 		    else
-			n.color = '#eee';
+			n.color = grey;
 		});
 		
 		s.graph.edges().forEach(function(e) { // highlight edge
 		    if (toKeep["edges"][e.id])
-			e.color = "#000";
+			e.color = black;
 		    else
-			e.color = e.originalColor;
+			e.color = grey;//e.originalColor;
 		});
 		
 		s.refresh();
 	    });
 
-	    s.bind('clickStage', function(e) {
+	    s.bind('doubleClickStage', function(e) {
 		renderAuthorInfo(
 		    {"text": "Click on a node to display associated info"},
 		    {"text": ""}
 		);
-		s.graph.nodes().forEach(function(n) {
-		    n.color = n.originalColor;
-		});
+
+		generations.forEach(function(gen){
+		    var myId = "#gen" + gen.replace(",", "");
+		    $(myId).bootstrapToggle('on');
+		});		
+		// s.graph.nodes().forEach(function(n) {
+		//     n.color = n.originalColor;
+		// });
 		
 		s.graph.edges().forEach(function(e) {
 		    e.color = e.originalColor;
 		});
-		
 		s.refresh();
 	    });
-	});   
+	});    
 });

@@ -26,39 +26,15 @@ var leafMap = function(){
 	dashArray : 3,
 	fillOpacity : 0
     };
+    var getColor = function(feature, hillN){
+	return scales[hillN](feature.properties['hill' + hillN]);
+    };
     var values = function(obj){
 	var result = [];
 	for(var prop in obj){
 	    if (obj.hasOwnProperty(prop)) result.push(obj[prop]);
 	}
 	return result;
-    };
-    var summation = function(vals){
-	var result = 0;
-	for (var i = vals.length; i--;) result += vals[i];
-	return result;
-    };
-    var hill = function(counts, n){
-	var total = summation(counts);
-	var ps = counts.map(function(e){return e/total;});
-	var result = 0;
-	switch(n){
-	case 0: 
-	    result = ps.length;
-	    break;
-	case 1: 
-	    for (var i = ps.length; i--;) result += (ps[i] * Math.log(ps[i]));
-	    result = Math.exp(-result);
-	    break;
-	case 2:
-	    for (var j = ps.length; j--;) result += Math.pow(ps[j], 2);
-	    result = 1 / result;
-	    break;
-	}
-	return result;
-    };    
-    var getColor = function(feature, hillN){
-	return scales[hillN](feature.properties['hill' + hillN]);
     };
     var onEachFeature = function(feature, layer){
 	// layer.bindPopup(feature.properties.name);
@@ -86,10 +62,12 @@ var leafMap = function(){
 	    function(data){
 		data['features'].forEach(// compute max hill & hill
 		    function(feature){
-			var vals = values(feature.properties.langs.map(
-			    function(d){return d.value;}));
-			for(var i = 0; i<3; i++) {
-			    var myHill = hill(vals, i);
+			var vals = [];
+			feature.properties.langs.forEach(function(e){
+			    vals.push(e.value);
+			});
+			for (var i = 0; i<3; i++) {
+			    var myHill = diversity.hill(vals, i);
 			    max[i] = Math.max(max[i], myHill);
 			    feature.properties['hill'+i] = myHill;
 			}
@@ -101,6 +79,7 @@ var leafMap = function(){
 		    style: defaultStyle,
 		    onEachFeature: onEachFeature
 		});
+
 		var geojsonHill = L.geoJson(data, {		    
 		    style: function(feature){
 			var myStyle = $.extend({}, defaultStyle);

@@ -64,8 +64,7 @@ div#map {
     fill: #337ab7;
 }
 
-.chart text {
-    /* fill: white; */
+.chart > svg > .bar > text {
     font: 10px sans-serif;
     text-anchor: end;
 }

@@ -1,4 +1,20 @@
-var generations = ["0", "1", "1,5", "2", "3", "4", "4,5"];
+var generations = ["0", "1", "1,5", "2", "2,5", "3", "4", "4,5"];
+var colorMap = {
+    "gen": {
+	"0": "#76e8b8", 
+	"1": "#78d83c", 
+	"2": "#d644c7", 
+	"3": "#bf352d", 
+	"4": "#b4ed95", 
+	"4,5": "#88d7ef", 
+	"2,5": "#71eda3",
+	"1,5": "#c3d14d"
+    }
+};
+
+var black = "#000";
+var lightGrey = "#f9f9f9";
+var grey = '#eee';
 
 function rescale(seq, newMin, newMax){
     var max = Math.max.apply(null, seq);
@@ -19,19 +35,6 @@ function rescale10(seq){
 };
 
 var randomColorMap = {};
-var colorMap = {
-    "gen": {
-	"0": "#76e8b8", 
-	"1": "#78d83c", 
-	"2": "#d644c7", 
-	"3": "#bf352d", 
-	"4": "#b4ed95", 
-	"4,5": "#88d7ef", 
-	"2,5": "#71eda3", 
-	"1,5": "#c3d14d"
-    }
-};
-
 function computeColor(cat, label){
     if (colorMap[cat]) {
 	return colorMap[cat][label];
@@ -55,7 +58,7 @@ function frequencies(obj){
 function renderAuthorInfo(info, keys){
     $('#author-info table').empty();
     $('#author-info #gen').empty();  
-    var table = $("#author-info table");//document.createElement('table');
+    var table = $("#author-info table"); 
     var tbody = document.createElement('tbody');
     Object.keys(info).forEach(function(k){
 	if (!keys.hasOwnProperty(k)) return;
@@ -71,7 +74,7 @@ function renderAuthorInfo(info, keys){
     table.append(tbody);    
     $('#author-info').prepend(table);
 
-    if (info.data){		// render chart
+    if (info.data){// render chart
 	$.plot("#gen", [ info.data ], {
 	    series: {
 		bars: {
@@ -86,4 +89,20 @@ function renderAuthorInfo(info, keys){
 	    }
 	});
     };  
+}
+
+function highlightGen(sigInst, gen){
+    sigInst.graph.nodes().forEach(function(n){
+	if (n.gen !== gen) {
+	    n.color = grey;
+	}
+    });
+    sigInst.refresh();
+}
+
+function getGen(sigInst, gen){
+    sigInst.graph.nodes().forEach(function(n){
+	if (n.gen == gen)
+	    console.log(n.id);
+    });
 }

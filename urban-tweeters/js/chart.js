@@ -1,5 +1,5 @@
 var chartD3 = function(){
-    var init = {};
+    var init = false;
     var padding = 50;
     var width = $('.chart').width(),
     height = $('.chart').height(),
@@ -18,11 +18,42 @@ var chartD3 = function(){
 	.attr('height', '100%')
 	.style('fill', '#f5f5f5');
 
-	chart.append('g')
-	    .attr('class', 'axis')
-	    .attr('transform', 'translate(10,' + ( height - 20 ) + ')');
+    // append text info
+    var text = ['The present visualisation is based on a large sample of',
+		'geolocated tweets that were posted by Twitter users while',
+		'being in Berlin. You can inspect the distribution of lan-',
+		'guages used in the different parts of Berlin by selecting',
+		'one of the three official administrative divisions of Berlin',
+		'and hovering over the map. In order to activate a map layer',
+		'you only need to select one from the radio buttons shown',
+		'at the top right corner of the map.',
+		'', 
+		'For each level you can also show the respective linguistic',
+		'diversities by clicking on checklist buttons below.',
+		'After that this text will disappear and never come back.',
+		'(Unless, of course, you refresh the browser)', 
+		'',
+		'I hope you enjoy it.'
+	       ];
+    var h = 30;
+    for(var s in text){
+	chart.append('text')
+	    .attr('x', 20)
+	    .attr('y', h)
+	    .attr('font-size', '12px')
+	    .text(text[s]);
+	h+=20;
+    }
+
+    back.append('g')
+	.attr('class', 'axis')
+	.attr('transform', 'translate(10,' + ( height - 20 ) + ')');
     
     var draw = function(data){
+	if (!init){
+	    chart.selectAll('text').remove();
+	    init = true;
+	}
 	var sorted = data.sort(function(a,b){
 	    return d3.descending(a.value,b.value);
 	}).slice(0, 12);
@@ -115,10 +146,7 @@ var chartD3 = function(){
     };
 
     return {
-	draw: draw,
-	redraw: function(){
-	    console.log('a');
-	}
+	draw: draw
     };
 }();
 
